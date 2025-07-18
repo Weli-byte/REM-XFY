@@ -22,3 +22,42 @@ p {
     font-size: 1.2rem;
     margin-top: 1rem;
 }
+#testButonu {
+    background: linear-gradient(90deg, #DA0050, #9300E9);
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#testButonu:hover {
+    transform: scale(1.05);
+}
+.kontrol-paneli {
+  /* Geri döndüğümüz canlı gradient renkleri */
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  
+  /* Diğer ayarlar aynı kalıyor */
+  max-width: 400px;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.kontrol-paneli #beatSecici {
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #555;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.kontrol-paneli #sesOynatici {
+    width: 100%;
+}
