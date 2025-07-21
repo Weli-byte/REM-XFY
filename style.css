@@ -37,7 +37,7 @@ p {
 }
 .kontrol-paneli {
   /* Geri döndüğümüz canlı gradient renkleri */
-  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  background: linear-gradient(90deg,  #ff00cc, #3333ff);
   
   /* Diğer ayarlar aynı kalıyor */
   max-width: 400px;
@@ -60,4 +60,48 @@ p {
 
 .kontrol-paneli #sesOynatici {
     width: 100%;
+}
+.soz-yazma-paneli {
+    max-width: 500px;
+    margin-top: 20px;
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.soz-yazma-paneli textarea#sozMetni {
+    width: 100%;
+    background: #181818;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* --- Şarkıyı Oluştur Butonu Stilleri --- */
+#sarkiOlusturButonu {
+  background-color: #00D9C0;  /* Canlı ve parlak Turkuaz Yeşili */
+  color: #111827;           /* Koyu yazı rengi (daha iyi kontrast için) */
+  border: none;              /* Kenarlık yok */
+  border-radius: 8px;        /* Yuvarlak kenarlar */
+  padding: 12px 24px;        /* İç boşluk (daha dolgun bir buton) */
+  font-size: 1rem;           /* Yazı boyutu */
+  font-weight: bold;         /* Kalın yazı */
+  cursor: pointer;           /* Üzerine gelince el imleci */
+  margin-top: 15px;          /* Üstündeki metin kutusundan biraz boşluk bırakır */
+  transition: all 0.2s ease-in-out; /* Tüm efektler için yumuşak geçiş */
+}
+
+/* Butonun üzerine gelince olacaklar (daha interaktif bir his için) */
+#sarkiOlusturButonu:hover {
+  transform: translateY(-2px); /* Hafifçe yukarı kalkma efekti */
+  filter: brightness(1.1);    /* Rengi biraz daha parlat */
+}
+
+.soz-yazma-paneli button#sarkiOlusturButonu:hover {
+    transform: scale(1.05);
 }

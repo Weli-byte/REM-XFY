@@ -11,3 +11,10 @@ beatSecici.addEventListener('change', function() {
         sesOynatici.src = '';
     }
 });
+const sarkiOlusturButonu = document.getElementById('sarkiOlusturButonu');
+const sozMetni = document.getElementById('sozMetni');
+
+sarkiOlusturButonu.addEventListener('click', function() {
+    const metin = sozMetni.value;
+    console.log(metin);
+});
