@@ -59,7 +59,11 @@ p {
 }
 
 .kontrol-paneli #sesOynatici {
-    width: 100%;
+  width: 100%;
+  
+  /* Oynatıcıyı karanlık temaya uydurmak için filtreler */
+  /* Renkleri ters çevirip, gri tonlarına indirip, parlaklığını kısıyoruz */
+  filter: invert(1) grayscale(1) brightness(0.8);
 }
 .soz-yazma-paneli {
     max-width: 500px;
@@ -104,4 +108,33 @@ p {
 
 .soz-yazma-paneli button#sarkiOlusturButonu:hover {
     transform: scale(1.05);
+}
+/* --- Sonuç Paneli Stilleri --- */
+.sonuc-paneli {
+  /* Diğer panellerle aynı gradient arka plan */
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  
+  /* Diğer panellerle aynı boyut ve konumlandırma */
+  max-width: 400px;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+
+  /* Bu satır önemli, başlangıçta gizli kalmasını sağlıyor */
+  display: none; 
+}
+
+/* Sonuç panelinin içindeki başlığın ve paragrafın stilleri */
+.sonuc-paneli h3 {
+  text-align: center;
+  color: black; /* Yazı rengini beyaz yapalım ki okunsun */
+}
+
+.sonuc-paneli p {
+  background-color: #181818; /* Tıpkı metin kutusu gibi yaptık */
+  border: 1px solid #555;  /* Bir de metin kutusu gibi kenarlık ekledik */
+  padding: 10px;
+  border-radius: 8px;      /* Kenar yuvarlaklığını diğeriyle aynı yaptık (8px) */
+  color: white;
+  text-align: left;
 }
