@@ -3,6 +3,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    display: flex; /* Bu satır tüm panelleri ortalamak için önemli */
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -11,7 +14,6 @@ h1 {
     margin-top: 2rem;
     background: linear-gradient(90deg, #ff00cc, #3333ff);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
 }
@@ -22,30 +24,23 @@ p {
     font-size: 1.2rem;
     margin-top: 1rem;
 }
-#testButonu {
-    background: linear-gradient(90deg, #DA0050, #9300E9);
-    color: #fff;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
 
-#testButonu:hover {
-    transform: scale(1.05);
-}
-.kontrol-paneli {
-  /* Geri döndüğümüz canlı gradient renkleri */
-  background: linear-gradient(90deg,  #ff00cc, #3333ff);
-  
-  /* Diğer ayarlar aynı kalıyor */
+/* --- Panel Stilleri (TÜM PANELLER İÇİN ORTAK) --- */
+.kontrol-paneli,
+.soz-yazma-paneli,
+.ai-paneli,
+.sonuc-paneli {
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
   max-width: 400px;
-  margin-top: 20px;
+  width: 90%; /* Küçük ekranlarda taşmayı önler */
   padding: 15px;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
+/* --- Panel İçi Özel Stiller --- */
+
+/* Beat Paneli */
 .kontrol-paneli #beatSecici {
     background: #2a2a2a;
     color: #fff;
@@ -54,87 +49,97 @@ p {
     margin-bottom: 10px;
     border-radius: 8px;
     padding: 8px 12px;
-    font-size: 1rem;
-    outline: none;
 }
-
 .kontrol-paneli #sesOynatici {
   width: 100%;
-  
-  /* Oynatıcıyı karanlık temaya uydurmak için filtreler */
-  /* Renkleri ters çevirip, gri tonlarına indirip, parlaklığını kısıyoruz */
   filter: invert(1) grayscale(1) brightness(0.8);
 }
-.soz-yazma-paneli {
-    max-width: 500px;
-    margin-top: 20px;
-    background: linear-gradient(90deg, #ff00cc, #3333ff);
-    padding: 15px;
-    border-radius: 10px;
+
+/* AI Paneli */
+.ai-paneli label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: black;
+}
+.ai-paneli input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background-color: #181818;
+    color: white;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.ai-paneli button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #00D9C0;
+    color: #111827;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.soz-yazma-paneli textarea#sozMetni {
+/* Söz Yazma Paneli */
+.soz-yazma-paneli h3 {
+    text-align: center;
+    color: black;
+    margin-top: 0;
+}
+.soz-yazma-paneli textarea {
     width: 100%;
     background: #181818;
     color: #fff;
     border: 1px solid #555;
     padding: 10px;
     border-radius: 8px;
-    font-size: 1rem;
-    resize: vertical;
-    box-sizing: border-box;
     margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.soz-yazma-paneli button {
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: #00D9C0;
+    color: #111827;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* --- Şarkıyı Oluştur Butonu Stilleri --- */
-#sarkiOlusturButonu {
-  background-color: #00D9C0;  /* Canlı ve parlak Turkuaz Yeşili */
-  color: #111827;           /* Koyu yazı rengi (daha iyi kontrast için) */
-  border: none;              /* Kenarlık yok */
-  border-radius: 8px;        /* Yuvarlak kenarlar */
-  padding: 12px 24px;        /* İç boşluk (daha dolgun bir buton) */
-  font-size: 1rem;           /* Yazı boyutu */
-  font-weight: bold;         /* Kalın yazı */
-  cursor: pointer;           /* Üzerine gelince el imleci */
-  margin-top: 15px;          /* Üstündeki metin kutusundan biraz boşluk bırakır */
-  transition: all 0.2s ease-in-out; /* Tüm efektler için yumuşak geçiş */
-}
-
-/* Butonun üzerine gelince olacaklar (daha interaktif bir his için) */
-#sarkiOlusturButonu:hover {
-  transform: translateY(-2px); /* Hafifçe yukarı kalkma efekti */
-  filter: brightness(1.1);    /* Rengi biraz daha parlat */
-}
-
-.soz-yazma-paneli button#sarkiOlusturButonu:hover {
-    transform: scale(1.05);
-}
-/* --- Sonuç Paneli Stilleri --- */
+/* Sonuç Paneli */
 .sonuc-paneli {
-  /* Diğer panellerle aynı gradient arka plan */
-  background: linear-gradient(90deg, #ff00cc, #3333ff);
-  
-  /* Diğer panellerle aynı boyut ve konumlandırma */
-  max-width: 400px;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 10px;
-
-  /* Bu satır önemli, başlangıçta gizli kalmasını sağlıyor */
   display: none; 
 }
-
-/* Sonuç panelinin içindeki başlığın ve paragrafın stilleri */
 .sonuc-paneli h3 {
   text-align: center;
-  color: black; /* Yazı rengini beyaz yapalım ki okunsun */
+  color: black;
 }
-
 .sonuc-paneli p {
-  background-color: #181818; /* Tıpkı metin kutusu gibi yaptık */
-  border: 1px solid #555;  /* Bir de metin kutusu gibi kenarlık ekledik */
+  background-color: #181818;
+  border: 1px solid #555;
   padding: 10px;
-  border-radius: 8px;      /* Kenar yuvarlaklığını diğeriyle aynı yaptık (8px) */
+  border-radius: 8px;
   color: white;
   text-align: left;
+}
+/* --- ANA YAPI DÜZENİ --- */
+.app-container {
+  display: flex;
+  justify-content: center; /* İçindeki sütunları sayfada ortalar */
+  align-items: flex-start; /* Sütunları yukarıdan hizalar */
+  gap: 20px; /* Sütunlar arasına boşluk koyar */
+  width: 100%;
+  padding: 0 20px; /* Sayfanın kenarlarından boşluk */
+  box-sizing: border-box;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column; /* İçindeki panelleri (AI ve Söz Yazma) alt alta dizer */
+  gap: 20px; /* O iki panel arasına boşluk koyar */
 }

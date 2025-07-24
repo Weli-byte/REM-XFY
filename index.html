@@ -7,28 +7,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <h1>Remixfy'a Hoş Geldiniz!</h1>
     <p>Burada kendi müziğini yapacaksın.</p>
-    <div class="kontrol-paneli">
-   <select id="beatSecici">
-  <option value="">-- Bir Beat Seç --</option>
-  <option value="beats/hard-trap-instrumental-with-marching-drums-375747.mp3">Hard Trap Instrumental</option>
-  <option value="beats/beat2.mp3">Trap Hype Beat 2</option>
-  <option value="beats/trap-hype-beat-338133.mp3">Trap Hype Beat</option>
-</select>
-    <br><br>
-    <audio id="sesOynatici" controls></audio>
-</div>
-<div class="soz-yazma-paneli">
-    <h3>Şarkı Sözlerini Buraya Yaz</h3>
-    <textarea id="sozMetni" rows="5"></textarea>
-    <br>
-    <button id="sarkiOlusturButonu">Şarkıyı Oluştur</button>
-</div>
-<div class="sonuc-paneli" id="sonucPaneli">
-    <h3>İşte Şarkın!</h3>
-    <p id="sonucSozleri"></p>
-</div>
+
+    <main class="app-container">
+
+        <div class="kontrol-paneli">
+            <select id="beatSecici">
+                <option value="">-- Bir Beat Seç --</option>
+                <option value="beats/hard-trap-instrumental-with-marching-drums-375747.mp3">Hard Trap Instrumental</option>
+                <option value="beats/beat2.mp3">Trap Hype Beat 2</option>
+                <option value="beats/trap-hype-beat-338133.mp3">Trap Hype Beat</option>
+            </select>
+            <audio id="sesOynatici" controls></audio>
+        </div>
+
+        <div class="main-content">
+            <div class="ai-paneli">
+                <label for="aiKonu">Konu Girerek AI'dan Söz Yazmasını İste:</label>
+                <input type="text" id="aiKonu" placeholder="Örn: yağmurlu bir gece...">
+                <button id="aiSozYazButonu">Söz Yazdır</button>
+            </div>
+
+            <div class="soz-yazma-paneli">
+                <h3>Şarkı Sözlerini Buraya Yaz</h3>
+                <textarea id="sozMetni" rows="5"></textarea>
+                <button id="sarkiOlusturButonu">Şarkıyı Oluştur</button>
+            </div>
+        </div>
+
+    </main> <div class="sonuc-paneli" id="sonucPaneli">
+        <h3>İşte Şarkın!</h3>
+        <p id="sonucSozleri"></p>
+    </div>
+
     <script src="script.js"></script>
+
 </body>
 </html>

@@ -34,3 +34,34 @@ sarkiOlusturButonu.addEventListener('click', function() {
   sonucPaneliElementi.style.display = 'block';
 
 });
+document.getElementById('aiSozYazButonu').addEventListener('click', async function() {
+  const konu = document.getElementById('aiKonu').value.trim();
+  const textarea = document.getElementById('sozTextarea'); // Textarea'nın id'si bu olmalı
+
+  if (!konu) {
+    textarea.value = 'Lütfen bir konu giriniz.';
+    return;
+  }
+
+  textarea.value = 'Yapay zeka düşünüyor...';
+
+  try {
+    const response = await fetch('/.netlify/functions/getLyrics', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ konu })
+    });
+
+    const data = await response.json();
+
+    if (data.soz) {
+      textarea.value = data.soz;
+    } else if (data.error) {
+      textarea.value = 'Hata: ' + data.error;
+    } else {
+      textarea.value = 'Beklenmeyen bir hata oluştu.';
+    }
+  } catch (err) {
+    textarea.value = 'Sunucuya bağlanılamadı.';
+  }
+});
