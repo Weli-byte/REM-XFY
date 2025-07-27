@@ -6,7 +6,7 @@
     <title>Remixfy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,6 +35,11 @@
             <div class="sonuc-paneli" id="sonucPaneli">
                 <h3>İşte Şarkın!</h3>
                 <div id="sonucSozleri" class="karaoke-ekrani"></div>
+                <div class="kayit-kontrolleri">
+                    <button id="kaydetButonu">🔴 Kaydet</button>
+                    <button id="durdurButonu" style="display:none;">⏹️ Durdur</button>
+                    <audio id="kayitOynatici" controls></audio>
+                </div>
             </div>
         </div>
     </main>
@@ -42,5 +47,4 @@
     <script src="script.js"></script>
 
 </body>
-</html>
 </html>

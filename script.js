@@ -4,6 +4,12 @@ const sarkiOlusturButonu = document.querySelector('#sarkiOlusturButonu');
 const sozMetniTextarea = document.querySelector('#sozMetni');
 const sonucPaneliElementi = document.querySelector('#sonucPaneli');
 const sonucSozleriElementi = document.querySelector('#sonucSozleri');
+const kaydetButonu = document.querySelector('#kaydetButonu');
+const durdurButonu = document.querySelector('#durdurButonu');
+const kayitOynatici = document.querySelector('#kayitOynatici');
+
+let mediaRecorder;
+let audioChunks = [];
 
 beatSecici.addEventListener('change', function() {
   if (beatSecici.value) {
@@ -28,35 +34,35 @@ sarkiOlusturButonu.addEventListener('click', function() {
   });
 
   sonucPaneliElementi.style.display = 'block';
-  karaokeAnimasyonunuBaslat();
 });
 
-function karaokeAnimasyonunuBaslat() {
-  const tumSatirlar = document.querySelectorAll('.soz-satiri');
-  let aktifSatirIndex = 0;
-
-  tumSatirlar.forEach(satir => {
-    satir.classList.remove('aktif-satir');
-  });
-  
-  if (tumSatirlar.length === 0) return;
-
-  tumSatirlar[aktifSatirIndex].classList.add('aktif-satir');
-
-  const zamanlayici = setInterval(function() {
-    if (tumSatirlar[aktifSatirIndex]) {
-      tumSatirlar[aktifSatirIndex].classList.remove('aktif-satir');
-    }
+kaydetButonu.addEventListener('click', async function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
     
-    aktifSatirIndex++;
+    mediaRecorder.ondataavailable = event => {
+      audioChunks.push(event.data);
+    };
 
-    if (aktifSatirIndex >= tumSatirlar.length) {
-      clearInterval(zamanlayici);
-      return;
-    }
+    mediaRecorder.onstop = () => {
+      const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      kayitOynatici.src = audioUrl;
+    };
 
-    if (tumSatirlar[aktifSatirIndex]) {
-      tumSatirlar[aktifSatirIndex].classList.add('aktif-satir');
-    }
-  }, 2000);
-}
+    audioChunks = [];
+    mediaRecorder.start();
+    
+    kaydetButonu.style.display = 'none';
+    durdurButonu.style.display = 'inline-block';
+  } else {
+     alert('Tarayıcınız ses kaydını desteklemiyor.');
+  }
+});
+
+durdurButonu.addEventListener('click', function() {
+  mediaRecorder.stop();
+  kaydetButonu.style.display = 'inline-block';
+  durdurButonu.style.display = 'none';
+});
