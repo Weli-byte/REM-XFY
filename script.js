@@ -1,67 +1,62 @@
-const beatSecici = document.getElementById('beatSecici');
-const sesOynatici = document.getElementById('sesOynatici');
-
-beatSecici.addEventListener('change', function() {
-    const secilenBeat = this.value;
-    if (secilenBeat) {
-        sesOynatici.src = secilenBeat;
-        sesOynatici.play();
-    } else {
-        sesOynatici.pause();
-        sesOynatici.src = '';
-    }
-});
-
-
-// --- Şarkı Oluşturma Paneli Mantığı ---
-
-// Önce ilgili tüm HTML elementlerini bir kere seçip hafızaya alalım
+const beatSecici = document.querySelector('#beatSecici');
+const sesOynatici = document.querySelector('#sesOynatici');
 const sarkiOlusturButonu = document.querySelector('#sarkiOlusturButonu');
-const sozMetniElementi = document.querySelector('#sozMetni');
+const sozMetniTextarea = document.querySelector('#sozMetni');
 const sonucPaneliElementi = document.querySelector('#sonucPaneli');
 const sonucSozleriElementi = document.querySelector('#sonucSozleri');
 
-// Şimdi butona tıklandığında ne olacağını söyleyelim
+beatSecici.addEventListener('change', function() {
+  if (beatSecici.value) {
+    sesOynatici.src = beatSecici.value;
+    sesOynatici.play();
+  } else {
+    sesOynatici.pause();
+    sesOynatici.src = '';
+  }
+});
+
 sarkiOlusturButonu.addEventListener('click', function() {
-  
-  // 1. Adım: Metin kutusundan o anki yazıyı al
-  const girilenMetin = sozMetniElementi.value;
+  const girilenMetin = sozMetniTextarea.value;
+  sonucSozleriElementi.innerHTML = '';
+  const satirlar = girilenMetin.split('\n');
 
-  // 2. Adım: Alınan yazıyı sonuç panelindeki paragrafın içine yaz
-  sonucSozleriElementi.innerText = girilenMetin;
+  satirlar.forEach(function(satir) {
+    const satirElementi = document.createElement('span');
+    satirElementi.className = 'soz-satiri';
+    satirElementi.innerText = satir || '\u00A0';
+    sonucSozleriElementi.appendChild(satirElementi);
+  });
 
-  // 3. Adım: Gizli olan sonuç panelini görünür yap
   sonucPaneliElementi.style.display = 'block';
-
+  karaokeAnimasyonunuBaslat();
 });
-document.getElementById('aiSozYazButonu').addEventListener('click', async function() {
-  const konu = document.getElementById('aiKonu').value.trim();
-  const textarea = document.getElementById('sozTextarea'); // Textarea'nın id'si bu olmalı
 
-  if (!konu) {
-    textarea.value = 'Lütfen bir konu giriniz.';
-    return;
-  }
+function karaokeAnimasyonunuBaslat() {
+  const tumSatirlar = document.querySelectorAll('.soz-satiri');
+  let aktifSatirIndex = 0;
 
-  textarea.value = 'Yapay zeka düşünüyor...';
+  tumSatirlar.forEach(satir => {
+    satir.classList.remove('aktif-satir');
+  });
+  
+  if (tumSatirlar.length === 0) return;
 
-  try {
-    const response = await fetch('/.netlify/functions/getLyrics', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ konu })
-    });
+  tumSatirlar[aktifSatirIndex].classList.add('aktif-satir');
 
-    const data = await response.json();
-
-    if (data.soz) {
-      textarea.value = data.soz;
-    } else if (data.error) {
-      textarea.value = 'Hata: ' + data.error;
-    } else {
-      textarea.value = 'Beklenmeyen bir hata oluştu.';
+  const zamanlayici = setInterval(function() {
+    if (tumSatirlar[aktifSatirIndex]) {
+      tumSatirlar[aktifSatirIndex].classList.remove('aktif-satir');
     }
-  } catch (err) {
-    textarea.value = 'Sunucuya bağlanılamadı.';
-  }
-});
+    
+    aktifSatirIndex++;
+
+    if (aktifSatirIndex >= tumSatirlar.length) {
+      clearInterval(zamanlayici);
+      return;
+    }
+
+    if (tumSatirlar[aktifSatirIndex]) {
+      tumSatirlar[aktifSatirIndex].classList.add('aktif-satir');
+    }
+  }, 2000);
+}

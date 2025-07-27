@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remixfy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +15,6 @@
     <p>Burada kendi müziğini yapacaksın.</p>
 
     <main class="app-container">
-
         <div class="kontrol-paneli">
             <select id="beatSecici">
                 <option value="">-- Bir Beat Seç --</option>
@@ -24,25 +26,21 @@
         </div>
 
         <div class="main-content">
-            <div class="ai-paneli">
-                <label for="aiKonu">Konu Girerek AI'dan Söz Yazmasını İste:</label>
-                <input type="text" id="aiKonu" placeholder="Örn: yağmurlu bir gece...">
-                <button id="aiSozYazButonu">Söz Yazdır</button>
-            </div>
-
             <div class="soz-yazma-paneli">
                 <h3>Şarkı Sözlerini Buraya Yaz</h3>
                 <textarea id="sozMetni" rows="5"></textarea>
                 <button id="sarkiOlusturButonu">Şarkıyı Oluştur</button>
             </div>
-        </div>
 
-    </main> <div class="sonuc-paneli" id="sonucPaneli">
-        <h3>İşte Şarkın!</h3>
-        <p id="sonucSozleri"></p>
-    </div>
+            <div class="sonuc-paneli" id="sonucPaneli">
+                <h3>İşte Şarkın!</h3>
+                <div id="sonucSozleri" class="karaoke-ekrani"></div>
+            </div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 
 </body>
+</html>
 </html>
